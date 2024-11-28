@@ -1,6 +1,12 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
+import { Domine } from "next/font/google"
 import "./globals.css"
+
+export const domine = Domine({
+  subsets: ["latin"],
+  variable: "--font-domine",
+})
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
+        className={`${geistSans.variable} ${geistMono.variable} ${domine.variable} antialiased font-sans`}
       >
         {children}
       </body>
