@@ -1,101 +1,102 @@
+"use client"
+
+import { motion } from "framer-motion"
 import Image from "next/image"
+
+const withBlur = true
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="relative h-screen w-screen overflow-hidden grid place-items-center bg-[#EEECEE]">
+      <motion.div
+        initial={{
+          background:
+            "radial-gradient(100% 100% at 75% 100%, rgba(188, 122, 142, 0) 0%, rgba(188, 122, 142, 0) 25%, rgba(188, 122, 142, 0) 50%, rgba(232, 104, 147, 0) 100%), radial-gradient(100% 50% at 0% 100%, rgba(194, 174, 181, 0) 0%, rgba(194, 174, 181, 0) 25%, rgba(194, 174, 181, 0) 50%, rgba(194, 174, 181, 0) 100%), radial-gradient(100% 100% at 0% 50%, rgba(242, 186, 178, 0) 0%, rgba(242, 186, 178, 0) 25%, rgba(242, 186, 178, 0) 50%, rgba(242, 186, 178, 0) 100%)",
+        }}
+        animate={{
+          background:
+            "radial-gradient(100% 100% at 75% 100%, #aa808c 0%, rgba(188, 122, 142, 0.75) 25%, rgba(204, 116, 144, 0.5) 50%, rgba(232, 104, 147, 0) 100%), radial-gradient(100% 50% at 0% 100%, #c2aeb5 0%, rgba(194, 174, 181, 0.75) 25%, rgba(194, 174, 181, 0.5) 50%, rgba(194, 174, 181, 0) 100%), radial-gradient(100% 100% at 0% 50%, #f2bab2 0%, rgba(242, 186, 178, 0.75) 25%, rgba(242, 186, 178, 0.5) 50%, rgba(242, 186, 178, 0) 100%)",
+        }}
+        transition={{
+          delay: 1.4,
+          duration: 2,
+        }}
+        className="absolute inset-0"
+      ></motion.div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      {[1, 2].map((item) => (
+        <motion.div
+          key={item}
+          initial={{
+            scale: 0,
+            x: "-50%",
+            y: "-50%",
+            filter: withBlur ? "blur(90px)" : undefined,
+          }}
+          animate={{
+            scale: [0, 1.4, 1],
+            x: ["-50%", "-30%", "0%"],
+            y: ["-50%", "-70%", "-100%"],
+            filter: withBlur ? "blur(190px)" : undefined,
+            opacity: [1, 1, 0],
+            transition: {
+              ease: "linear",
+              duration: 2.4,
+              delay: 1.2,
+            },
+          }}
+          className="absolute left-1/2 top-1/2 w-[24rem] h-[24rem] rounded-full p-7"
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <div className="bg-[rgba(234,176,165,1)] absolute w-[115%] h-[115%] rounded-full left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute inset-0 bg-white mix-blend-overlay rounded-full" />
+          <div className="absolute inset-0 bg-white mix-blend-overlay rounded-full" />
+        </motion.div>
+      ))}
+
+      <motion.div
+        initial={{
+          x: "-50%",
+          y: "-50%",
+          opacity: 0,
+          filter: withBlur ? "blur(90px)" : undefined,
+        }}
+        animate={{
+          scale: [1, 1.5],
+          opacity: [0, 1],
+          x: ["-50%", "20%"],
+          y: ["-50%", "-100%"],
+          filter: withBlur ? "blur(150px)" : undefined,
+        }}
+        transition={{
+          duration: 2,
+          delay: 1.8,
+        }}
+        className="absolute mix-blend-overlay h-[24rem] bg-white w-[24rem] top-1/2 left-1/2 rounded-full"
+      />
+      <motion.p
+        className="absolute top-[60%] left-1/2 -translate-x-1/2 text-black text-3xl text-center font-bold font-serif"
+        initial={{
+          opacity: 0,
+          filter: withBlur ? "blur(90px)" : undefined,
+        }}
+        animate={{
+          opacity: [0, 1],
+          filter: withBlur ? "blur(0px)" : undefined,
+        }}
+        transition={{
+          duration: 2,
+          delay: 1.6,
+        }}
+      >
+        Say hello on comments
+      </motion.p>
+      <Image
+        className="mix-blend-multiply"
+        src="/img.png"
+        width={100}
+        height={100}
+        alt=""
+      />
     </div>
   )
 }
