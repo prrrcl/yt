@@ -1,101 +1,119 @@
+"use client"
+
+import { cn } from "@/lib/utils"
+import { AnimatePresence, motion, Transition } from "framer-motion"
 import Image from "next/image"
+import { useState } from "react"
+
+const transition: Transition = {
+  duration: 0.3,
+  ease: [0.42, 0, 0.58, 1],
+}
+
+const rotations = [-2, 2, -4, 4, 0]
+
+const expandedPositions = [
+  {
+    x: "-150%",
+    y: "20%",
+    rotate: -10,
+  },
+  {
+    x: "30%",
+    y: "-110%",
+    rotate: -20,
+  },
+  {
+    x: "-160%",
+    y: "-100%",
+    rotate: 20,
+  },
+  {
+    x: "30%",
+    y: "30%",
+    rotate: 20,
+  },
+]
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [open, setOpen] = useState(false)
+  const [expanded, setExpanded] = useState(false)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="max-w-96 group relative">
+        <p
+          className={cn(
+            "text-white group-hover:text-white/50 transition-all duration-300",
+            open && "text-white/0 group-hover:text-white/0"
+          )}
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          quos. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut qui
+          laborum at asperiores id error, quas, eius culpa nesciunt modi
+          officiis quisquam.{" "}
+          <button onMouseMove={() => setOpen(true)} className="text-white">
+            Gallery
+          </button>{" "}
+          Quae, perferendis? Accusantium ipsam odio illo commodi aspernatur.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          quos. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut qui
+          laborum at asperiores id error, quas, eius culpa nesciunt modi
+          officiis quisquam.
+        </p>
+        <AnimatePresence>
+          {open && (
+            <div
+              className="absolute inset-0"
+              onMouseLeave={() => {
+                setOpen(false)
+                setExpanded(false)
+              }}
+            >
+              {[4, 3, 2, 1].map((image, index) => (
+                <motion.div
+                  key={image}
+                  onClick={() => setExpanded(true)}
+                  initial={{
+                    x: "-50%",
+                    y: "-50%",
+                    rotate: rotations[index % rotations.length],
+                    clipPath: "polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)",
+                  }}
+                  animate={{
+                    x: expanded
+                      ? expandedPositions[index % expandedPositions.length].x
+                      : "-50%",
+                    y: expanded
+                      ? expandedPositions[index % expandedPositions.length].y
+                      : "-50%",
+                    rotate: expanded
+                      ? expandedPositions[index % expandedPositions.length]
+                          .rotate
+                      : rotations[index % rotations.length],
+                    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                  }}
+                  exit={{
+                    clipPath: "polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)",
+                  }}
+                  transition={{
+                    ...transition,
+                    delay: expanded ? 0 : index * 0.1,
+                  }}
+                  className="absolute w-full aspect-square top-1/2 left-1/2"
+                >
+                  <Image
+                    src={`/${image}.jpg`}
+                    alt={`Image ${image}`}
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   )
 }
